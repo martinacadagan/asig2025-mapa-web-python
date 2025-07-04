@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_2f828f59198baa9f0f2a192e2f4890c5 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.2/leaflet.draw.css"/>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_2f828f59198baa9f0f2a192e2f4890c5" ></div>
+        
+    
+            
+        
+</body>
+<script>
+    
+    
+            var map_2f828f59198baa9f0f2a192e2f4890c5 = L.map(
+                "map_2f828f59198baa9f0f2a192e2f4890c5",
+                {
+                    center: [-39.82, -73.25],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 11,
+  "zoomControl": true,
+  "preferCanvas": false,
+  "drawExport": false,
+  "layersControl": true,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_2f828f59198baa9f0f2a192e2f4890c5);
+
+            
+
+        
+    
+            var tile_layer_b2cd35580923a1b0426957c797cb3773 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 24,
+  "maxNativeZoom": 24,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_b2cd35580923a1b0426957c797cb3773.addTo(map_2f828f59198baa9f0f2a192e2f4890c5);
+        
+    
+            L.control.fullscreen(
+                {
+  "position": "topleft",
+  "title": "Full Screen",
+  "titleCancel": "Exit Full Screen",
+  "forceSeparateButton": false,
+}
+            ).addTo(map_2f828f59198baa9f0f2a192e2f4890c5);
+        
+    
+            var options = {
+              position: "topleft",
+              draw: {},
+              edit: {},
+            }
+                // FeatureGroup is to store editable layers.
+                var drawnItems_draw_control_9e0e0876077126465f51d544b02f26b9 =
+                    new L.featureGroup().addTo(
+                        map_2f828f59198baa9f0f2a192e2f4890c5
+                    );
+
+            options.edit.featureGroup = drawnItems_draw_control_9e0e0876077126465f51d544b02f26b9;
+            var draw_control_9e0e0876077126465f51d544b02f26b9 = new L.Control.Draw(
+                options
+            ).addTo( map_2f828f59198baa9f0f2a192e2f4890c5 );
+            map_2f828f59198baa9f0f2a192e2f4890c5.on(L.Draw.Event.CREATED, function(e) {
+                var layer = e.layer,
+                    type = e.layerType;
+                var coords = JSON.stringify(layer.toGeoJSON());
+                layer.on('click', function() {
+                    alert(coords);
+                    console.log(coords);
+                });
+                drawnItems_draw_control_9e0e0876077126465f51d544b02f26b9.addLayer(layer);
+            });
+            map_2f828f59198baa9f0f2a192e2f4890c5.on('draw:created', function(e) {
+                drawnItems_draw_control_9e0e0876077126465f51d544b02f26b9.addLayer(e.layer);
+            });
+
+            
+        
+    
+
+            var geocoderOpts_geocoder_12fee0a2d1cd332a75f6ad9ab5bd7dba = {
+  "collapsed": true,
+  "position": "topleft",
+  "defaultMarkGeocode": true,
+  "zoom": 11,
+  "provider": "nominatim",
+  "providerOptions": {
+},
+};
+
+            // note: geocoder name should start with lowercase
+            var geocoderName_geocoder_12fee0a2d1cd332a75f6ad9ab5bd7dba = geocoderOpts_geocoder_12fee0a2d1cd332a75f6ad9ab5bd7dba["provider"];
+
+            var customGeocoder_geocoder_12fee0a2d1cd332a75f6ad9ab5bd7dba = L.Control.Geocoder[ geocoderName_geocoder_12fee0a2d1cd332a75f6ad9ab5bd7dba ](
+                geocoderOpts_geocoder_12fee0a2d1cd332a75f6ad9ab5bd7dba['providerOptions']
+            );
+            geocoderOpts_geocoder_12fee0a2d1cd332a75f6ad9ab5bd7dba["geocoder"] = customGeocoder_geocoder_12fee0a2d1cd332a75f6ad9ab5bd7dba;
+
+            L.Control.geocoder(
+                geocoderOpts_geocoder_12fee0a2d1cd332a75f6ad9ab5bd7dba
+            ).on('markgeocode', function(e) {
+                var zoom = geocoderOpts_geocoder_12fee0a2d1cd332a75f6ad9ab5bd7dba['zoom'] || map_2f828f59198baa9f0f2a192e2f4890c5.getZoom();
+                map_2f828f59198baa9f0f2a192e2f4890c5.setView(e.geocode.center, zoom);
+            }).addTo(map_2f828f59198baa9f0f2a192e2f4890c5);
+
+        
+    
+            map_2f828f59198baa9f0f2a192e2f4890c5.fitBounds(
+                [[-39.82, -73.25], [-39.82, -73.25]],
+                {"maxZoom": 11}
+            );
+        
+    
+            var tile_layer_bd67af8c9e4e05449390bb17d0ca3db7 = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+                {
+  "minZoom": 0,
+  "maxZoom": 24,
+  "maxNativeZoom": 24,
+  "noWrap": false,
+  "attribution": "Esri",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_bd67af8c9e4e05449390bb17d0ca3db7.addTo(map_2f828f59198baa9f0f2a192e2f4890c5);
+        
+    
+        L.Control.CustomControl = L.Control.extend({
+            onAdd: function(map) {
+                let div = L.DomUtil.create('div');
+                div.innerHTML = `<div style="font-size: 20px; color: black; font-weight: normal;
+            padding: 5px; background-color: white;
+            border-radius: 5px;">Centros de interés turístico de Valdivia</div>`;
+                return div;
+            },
+            onRemove: function(map) {
+                // Nothing to do here
+            }
+        });
+        L.control.customControl = function(opts) {
+            return new L.Control.CustomControl(opts);
+        }
+        L.control.customControl(
+            { position: "topright" }
+        ).addTo(map_2f828f59198baa9f0f2a192e2f4890c5);
+        
+    
+            var marker_639a8ae85c62f6cb7131cf2cea27d8df = L.marker(
+                [-39.867, -73.396],
+                {
+  "iconColor": "darkred",
+}
+            ).addTo(map_2f828f59198baa9f0f2a192e2f4890c5);
+        
+    
+        var popup_98ce5618252e79c000b655dab7275757 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5a112d370cd2adf071095b74e975941f = $(`<div id="html_5a112d370cd2adf071095b74e975941f" style="width: 100.0%; height: 100.0%;">         <div style="text-align:center;">           <b>Fuerte de Niebla</b><br>           Describa el sitio<br>           <img src="fuerte_niebla.jpeg" alt="Fuerte de Niebla" style="width:250px; margin-top:4px;">         </div>     </div>`)[0];
+                popup_98ce5618252e79c000b655dab7275757.setContent(html_5a112d370cd2adf071095b74e975941f);
+            
+        
+
+        marker_639a8ae85c62f6cb7131cf2cea27d8df.bindPopup(popup_98ce5618252e79c000b655dab7275757)
+        ;
+
+        
+    
+    
+            var marker_fa703dd4aad11372612ecaa96b7fa7d8 = L.marker(
+                [-39.883, -73.428],
+                {
+  "iconColor": "darkred",
+}
+            ).addTo(map_2f828f59198baa9f0f2a192e2f4890c5);
+        
+    
+        var popup_9ff37e4de200482a4e96d6049bead882 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_5d2c56e47c63122920ff2c13709035a4 = $(`<div id="html_5d2c56e47c63122920ff2c13709035a4" style="width: 100.0%; height: 100.0%;">         <div style="text-align:center;">           <b>Castillo de Corral</b><br>           Describa el sitio<br>           <img src="fuerte_corral.jpeg" alt="Castillo de Corral" style="width:250px; margin-top:4px;">         </div>     </div>`)[0];
+                popup_9ff37e4de200482a4e96d6049bead882.setContent(html_5d2c56e47c63122920ff2c13709035a4);
+            
+        
+
+        marker_fa703dd4aad11372612ecaa96b7fa7d8.bindPopup(popup_9ff37e4de200482a4e96d6049bead882)
+        ;
+
+        
+    
+    
+            var marker_76c8448b5b96c79e5cad8f2fab7c4376 = L.marker(
+                [-39.817, -73.245],
+                {
+  "iconColor": "darkred",
+}
+            ).addTo(map_2f828f59198baa9f0f2a192e2f4890c5);
+        
+    
+        var popup_fc20f1c8148402c1218b91cb391e2a6a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7bea3dcca2c3ab5d8283287f2e6adc20 = $(`<div id="html_7bea3dcca2c3ab5d8283287f2e6adc20" style="width: 100.0%; height: 100.0%;">         <div style="text-align:center;">           <b>Museo de la telecomunicaciones</b><br>           describa el sitio<br>           <img src="museo_tele.jpeg" alt="Museo de la telecomunicaciones" style="width:250px; margin-top:4px;">         </div>     </div>`)[0];
+                popup_fc20f1c8148402c1218b91cb391e2a6a.setContent(html_7bea3dcca2c3ab5d8283287f2e6adc20);
+            
+        
+
+        marker_76c8448b5b96c79e5cad8f2fab7c4376.bindPopup(popup_fc20f1c8148402c1218b91cb391e2a6a)
+        ;
+
+        
+    
+    
+            var layer_control_efb30ff6581a4f237383ec182537de10_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_b2cd35580923a1b0426957c797cb3773,
+                },
+                overlays :  {
+                    "Esri.WorldImagery" : tile_layer_bd67af8c9e4e05449390bb17d0ca3db7,
+                },
+            };
+            let layer_control_efb30ff6581a4f237383ec182537de10 = L.control.layers(
+                layer_control_efb30ff6581a4f237383ec182537de10_layers.base_layers,
+                layer_control_efb30ff6581a4f237383ec182537de10_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_2f828f59198baa9f0f2a192e2f4890c5);
+
+        
+</script>
+</html>
